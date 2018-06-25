@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>TA-TE-TI</title>
+  <link rel="stylesheet" href="css/bulma.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+  <nav id="containerUser">
+    <div class="elementLeft">
+      <div class="field has-addons">
+        <div class="control">
+          <input class="input is-rounded" type="text" placeholder="Nombre" id="namePlayer">
+        </div>
+        <div class="control">
+          <a class="button is-info" id="ctaGame">
+            Jugar
+        </a>
+          <a class="button is-danger">
+            Reset
+        </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="elementRight">
+      <span id="nameUser">Player 1</span>
+    </div>
+  </nav>
+  <div class="container">
+    <div id="containerGame">
+      <div class="columns">
+        <div class="column is-one-third  elementGame" id="element1"></div>
+        <div class="column is-one-third lateralLines elementGame " id="element2"></div>
+        <div class="column is-one-third elementGame " id="element3"></div>
+      </div>
+      <div class="columns">
+        <div class="column is-one-third upDownLines elementGame" id="element4"></div>
+        <div class="column is-one-third upDownLines lateralLines elementGame" id="element5"></div>
+        <div class="column is-one-third upDownLines elementGame" id="element6"></div>
+      </div>
+      <div class="columns">
+        <div class="column is-one-third elementGame" id="element7"></div>
+        <div class="column is-one-third lateralLines elementGame" id="element8"></div>
+        <div class="column is-one-third elementGame" id="element9"></div>
+      </div>
+    </div>
+  </div>
+  <script src="js/index.js"></script>
+</body>
+
+</html>

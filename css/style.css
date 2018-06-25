@@ -1,0 +1,53 @@
+#containerUser {
+  background-color: hsl(171, 100%, 41%);
+  padding: 2vh;
+}
+
+#containerGame {
+  margin-top: 6vh;
+}
+
+.lateralLines {
+  border-left: 5px solid hsl(204, 86%, 53%);
+  border-right: 5px solid hsl(204, 86%, 53%);
+}
+
+.upDownLines {
+  border-top: 5px solid hsl(204, 86%, 53%);
+  border-bottom: 5px solid hsl(204, 86%, 53%);
+}
+
+.columns {
+  height: 28vh;
+}
+
+.hiddenElement {
+  display: none
+}
+
+.elementLeft,
+.elementRight {
+  display: inline-block;
+}
+
+.elementRight {
+  float: right;
+}
+
+#nameUser {
+  font-size: 30px;
+}
+
+.imageO {
+  background-image: url('../img/o.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.imageX {
+  background-image: url('../img/x.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
