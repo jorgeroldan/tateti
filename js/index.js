@@ -21,6 +21,7 @@ let cuadro8 = document.getElementById("element9")
 cuadro8 = cuadro8.style.backgroundImage;
 let tatetiActual = [cuadro0,cuadro1, cuadro2, cuadro3, cuadro4, cuadro5, cuadro6, cuadro7, cuadro8];
 
+//-----------------------------------Actualizar Valores del DOM en las variables-------------------------------------------------------//
 
 function actualizarValoresTateti() {
     cuadro0 = cuadro0.style.backgroundImage;
@@ -113,6 +114,8 @@ function definirTurnoAleatorio() {
         jugador2 = true;
     };
 };
+
+//-----------------------------------Cambiar Turno e imagen de fondo-------------------------------------------------------//
 
 function cambiarTurno() {
     if (jugador1 === true) {
