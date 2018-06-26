@@ -22,6 +22,18 @@ cuadro8 = cuadro8.style.backgroundImage;
 let tatetiActual = [cuadro0,cuadro1, cuadro2, cuadro3, cuadro4, cuadro5, cuadro6, cuadro7, cuadro8];
 
 
+function actualizarValoresTateti() {
+    cuadro0 = cuadro0.style.backgroundImage;
+    cuadro1 = cuadro1.style.backgroundImage;
+    cuadro2 = cuadro2.style.backgroundImage;
+    cuadro3 = cuadro3.style.backgroundImage;
+    cuadro4 = cuadro4.style.backgroundImage;
+    cuadro5 = cuadro5.style.backgroundImage;
+    cuadro6 = cuadro6.style.backgroundImage;
+    cuadro7 = cuadro7.style.backgroundImage;
+    cuadro8 = cuadro8.style.backgroundImage;
+}
+
 //-----------------------------------Función comparar -------------------------------------------------------//
 let hayGanador = false;
 
@@ -66,20 +78,6 @@ function ganador(){
 }
 
 
-// function chequearSiGano() {
-//     for (let i = 0; i < tatetiActual.length; i++) {
-//         for (let j = 0; j < tatetiActual[i].length; j++) {
-//             if (i * 3 + (1 + j) !== tatetiActual[i][j]) {
-//                 return false;
-//             }
-//         }
-//     }
-//     console.log("ganaste");
-//     return true;
-// }
-
-
-
 //-----------------------------------Cambiar Turno-------------------------------------------------------//
 
 function cambiarTurno() {
@@ -97,55 +95,54 @@ function cambiarTurno() {
 }
 
 
-//-----------------------------------Función B-------------------------------------------------------//
+//-----------------------------------Función O y X-------------------------------------------------------//
 
+let jugador1;
+let jugador2;
+let columnas = document.getElementsByClassName("column");
+let numeroAleatorio = Math.floor(Math.random() * 2);
 
-//-----------------------------------Arrays Ganadores-------------------------------------------------------//
+function definirTurnoAleatorio() {
+    if (numeroAleatorio === 0) {
+        console.log("juega1")
+        jugador1 = true;
+    };
 
-// let tatetiWin1 = [
-//     [tatetiActual[0], tatetiActual[1], tatetiActual[2]],
-//     ['', '', ''],
-//     ['', '', '']
-// ];
+    if (numeroAleatorio === 1) {
+        console.log("juega2")
+        jugador2 = true;
+    };
+};
 
-// let tatetiWin2 = [
-//     [false, false, false],
-//     [cuadro4, cuadro5, cuadro6],
-//     [false, false, false]
-// ];
+function cambiarTurno() {
+    if (jugador1 === true) {
+        console.log('juega jugador2');
+        jugador1 = false;
+        jugador2 = true;
+        return;
+    } else {
+        console.log('juega jugador1');
+        jugador2 = false;
+        jugador1 = true;
+        return;
+    }
 
-// let tatetiWin3 = [
-//     [false, false, false],
-//     [false, false, false],
-//     [cuadro7, cuadro8, cuadro9]
-// ];
+}
 
-// let tatetiWin4 = [
-//     [cuadro1, false, false],
-//     [cuadro4, 0, 0],
-//     [cuadro6, 0, 0]
-// ];
+function cambiarImagenFondo(e) {
+    if (jugador1) {
+        e.target.classList.add("imageO");
+  
+        cambiarTurno();
+    } else if (jugador2) {
+        e.target.classList.add("imageX");
+  
+        cambiarTurno();
+    }
+}
+let botonInicio = document.getElementById("ctaGame");
+botonInicio.addEventListener("click", definirTurnoAleatorio);
 
-// let tatetiWin5 = [
-//     [false, cuadro2, false],
-//     [false, cuadro5, false],
-//     [false, cuadro7, false]
-// ];
-
-// let tatetiWin6 = [
-//     [false, false, cuadro3],
-//     [false, false, cuadro6],
-//     [false, false, cuadro9]
-// ];
-
-// let tatetiWin7 = [
-//     [cuadro1, false, false],
-//     [false, cuadro5, false],
-//     [false, false, cuadro9]
-// ];
-
-// let tatetiWin8 = [
-//     [false, false, cuadro3],
-//     [false, cuadro5, false],
-//     [cuadro3, false, false]
-// ];
+for (var i = 0; i < columnas.length; i++) {
+    columnas[i].addEventListener("click", cambiarImagenFondo);
+}
