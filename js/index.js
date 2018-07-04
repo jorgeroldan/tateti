@@ -1,4 +1,5 @@
 
+
 //-----------------------------------VARIABLES JUEGO -------------------------------------------------------//
 
 // VARIABLES INICIALES
@@ -6,11 +7,12 @@
 let hayGanador = false;
 let jugador1;
 let jugador2;
+let indicaQuienJuega = document.getElementById("nameUser");
+indicaQuienJuega.innerHTML = "¡Presiona JUGAR!"
 let columnas = document.getElementsByClassName("column");
 let numeroAleatorio = Math.floor(Math.random() * 2);
 
 // GUARDA LAS POSICIONES
-
 
 let cuadro0 = document.getElementById("element1")
 let cuadro1 = document.getElementById("element2")
@@ -39,43 +41,6 @@ let valor8 = "Vacio 8"
 let cuadrosTateti = [cuadro0,cuadro1, cuadro2, cuadro3, cuadro4, cuadro5, cuadro6, cuadro7, cuadro8]
 let tatetiActual = [valor0, valor1, valor2, valor3, valor4, valor5, valor6, valor7, valor8];
 
-//----------------------------------- Función Define Turnos Aleatorios -------------------------------------------------------//
-
-
-function definirTurnoAleatorio() {
-    if (numeroAleatorio === 0) {
-        console.log("juega1")
-        jugador1 = true;
-    };
-    if(numeroAleatorio === 1){
-        console.log("juega2")
-        jugador2 = true;
-        colocaComputadora();
-    };
-};
-//-----------------------------------validar y agregar ficha-------------------------------------------------------//
-
-function cambiarImagenFondo(e) {
-    if (jugador1) {
-          if( e.target.classList.contains("imageO") || e.target.classList.contains("imageX")   ){
-            alert("elige una posicion correcta")
-          }
-          else{
-            e.target.classList.add("imageO");
-            colocaComputadora();
-              iniciar();
-          }
-    }
-    else if (jugador2) {
-          if( e.target.classList.contains("imageX") || e.target.classList.contains("imageO") ){
-            alert("nononono")
-          }
-          else{
-            e.target.classList.add("imageX");
-            iniciar();
-          }
-    }
-}
 //-----------------------------------Actualizar Valores de los Cuadros-------------------------------------------------------//
 
 function actualizarValoresTateti() {
@@ -84,34 +49,35 @@ function actualizarValoresTateti() {
 // SEGUNDO: Si esas clases están asignadas, guarda el valor en el Array "TatetiActual"
 
 for(i = 0; i < tatetiActual.length; i++) {
-
+       
         if (cuadrosTateti[i].classList.contains("imageX")) {
-
-            tatetiActual[i] = "X";
-
+            
+            tatetiActual[i] = "X"
+            
         } else if (cuadrosTateti[i].classList.contains("imageO")) {
-
-            tatetiActual[i] = "O";
-
-
-        }
+           
+            tatetiActual[i] = "O"
+           
+            
+        } 
     }
 
 }
 
-
 // ------------------ movimiento automatico de la computadora  --------- //
 
 function colocaComputadora(){
-        let numeroAleatorio = Math.floor(Math.random() * 8);
-        if( columnas[numeroAleatorio].classList.contains("imageX") || columnas[numeroAleatorio].classList.contains("imageO") ){
-          colocaComputadora();
-        } else{
-          columnas[numeroAleatorio].classList.add("imageX");
-          iniciar();
-        }
+    let numeroAleatorio = Math.floor(Math.random() * 8);
+    if( columnas[numeroAleatorio].classList.contains("imageX") || columnas[numeroAleatorio].classList.contains("imageO") ){
+      colocaComputadora();
+    } else{
+        setTimeout(function() {
+            columnas[numeroAleatorio].classList.add("imageO");
+            actualizar();
+        }, 1000);
+      
+    }
 }
-
 
 //-----------------------------------Función comparar -------------------------------------------------------//
 
@@ -142,19 +108,63 @@ function chequeaSiGanoTateti() {
                             } else if (tatetiActual[2] === tatetiActual[4] && tatetiActual[4] === tatetiActual[6]) {
                                 console.log('ganaste');
                                 hayGanador = true;
-                                }
+                                } 
     ganador()
+
 }
 
 function ganador(){
     if (hayGanador && jugador1){
         console.log('gana jugador 1');
         alert("GANA JUGADOR 1")
+        jugador1 = false
+        jugador2 = false
+        hayGanador = false
     } else if (hayGanador && jugador2) {
         console.log('gana jugador 2');
+        jugador1 = false
+        jugador2 = false
+        hayGanador = false
         alert("GANA JUGADOR 2")
     }
 }
+
+
+//-----------------------------------Cambiar Turno-------------------------------------------------------//
+
+function cambiarTurno() {
+    if (jugador1 === true) {
+        jugador1 = false;
+        jugador2 = true;
+
+        console.log('juega jugador2');
+    } else if (jugador2 === true) {
+        jugador2 = false;
+        jugador1 = true;
+        console.log('juega jugador1');
+    } else if (jugador1 === jugador2) {
+        preventDefault;
+    }
+}
+
+
+//-----------------------------------Función O y X-------------------------------------------------------//
+
+
+function definirTurnoAleatorio() {
+    if (numeroAleatorio === 0) {
+        console.log("juega1")
+        indicaQuienJuega.innerHTML = "Juega: Player1"
+        jugador1 = true;
+    };
+
+    if (numeroAleatorio === 1) {
+        console.log("juega2")
+        indicaQuienJuega.innerHTML = "Juega: Player2"
+        jugador2 = true;
+        colocaComputadora()
+    };
+};
 
 //-----------------------------------Chequea Empate-------------------------------------------------------//
 
@@ -167,41 +177,61 @@ function ganador(){
 
 
 
-//-----------------------------------Cambiar Turno-------------------------------------------------------//
+
+//-----------------------------------Cambiar Turno e imagen de fondo-------------------------------------------------------//
 
 function cambiarTurno() {
     if (jugador1 === true) {
+        console.log('juega jugador2');
         jugador1 = false;
         jugador2 = true;
-        console.log('juega jugador2');
-    } else if (jugador2 === true) {
+        indicaQuienJuega.innerHTML = "Juega: Player2"
+        colocaComputadora()
+        return;
+    } else {
+        console.log('juega jugador1');
         jugador2 = false;
         jugador1 = true;
-        console.log('juega jugador1');
+        indicaQuienJuega.innerHTML = "Juega: Player1"
+        return;
     }
+
 }
 
-function resetGame(){
-      location.reload(true);
+function cambiarImagenFondo(e) {
+    if (jugador1) {
+        if( e.target.classList.contains("imageX") || e.target.classList.contains("imageO") ){
+            alert("¡No, no!")
+          } else {
+            e.target.classList.add("imageX");
+            actualizar()
+          }
+       
+    } 
 }
+
+// RESET 
+
+function resetGame(){
+    location.reload(true);
+}
+
 // ------------------ BOTON INICIO & Event Listener para JUGADA del USUARIO --------- //
 
 let botonInicio = document.getElementById("ctaGame");
 botonInicio.addEventListener("click", definirTurnoAleatorio);
 
-let botonReset = document.getElementById("reset-button");
-botonReset.addEventListener("click", resetGame);
+let botonReset = document.getElementById("reset");
+botonReset.addEventListener("click", resetGame)
 
-
-  for (var i = 0; i < columnas.length; i++) {
-      columnas[i].addEventListener("click", cambiarImagenFondo);
+for (var i = 0; i < columnas.length; i++) {
+    columnas[i].addEventListener("click", cambiarImagenFondo);
 }
 
 
-
-function iniciar(){
-      actualizarValoresTateti();
-      chequeaSiGanoTateti();
-      // chequearEmpate();
-      cambiarTurno();
+function actualizar(){
+    actualizarValoresTateti();
+    chequeaSiGanoTateti();
+    // chequearEmpate();
+    cambiarTurno();
 }
